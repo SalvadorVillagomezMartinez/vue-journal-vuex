@@ -4,10 +4,11 @@ import * as getters from './getters';
 import * as mutuations from './mutuations';
 
 const journalModule={
-    namespace :true,
+    namespaced: true,
     actions,
     getters,
     mutuations,
     state
+    
 }
 export default journalModule
