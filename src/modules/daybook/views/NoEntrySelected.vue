@@ -3,7 +3,9 @@
     <h1 class="align-self-center">No hay nada seleccionado</h1>
     
   </div>
-  <FabComponent/>
+  <FabComponent
+    @on:click="addEntry"
+  />
 </template>
 
 <script>
@@ -11,6 +13,11 @@
     export default {
         components: {
             FabComponent: defineAsyncComponent (()=> import('../components/FabComponent.vue')),
+        },
+        methods:{
+            addEntry(){
+                this.$router.push({name:'entry' , params:{id:'new'}})
+            }
         }
     }
 </script>

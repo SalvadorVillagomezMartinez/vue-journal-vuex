@@ -11,7 +11,6 @@
 export default {
   methods:{
     gotoDatbook(){
-      console.log("a")
       this.$router.push({name:'no-entry'})
     }
   }

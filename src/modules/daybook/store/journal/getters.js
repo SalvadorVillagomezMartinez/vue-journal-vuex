@@ -1,5 +1,5 @@
-// // export const myGetter =  (satate) =>{
-//     return satate
+// // export const myGetter =  (state) =>{
+//     return state
 // // }
 export const getEntriesByTerm = ( state ) => ( term = '' ) => {
 
@@ -16,4 +16,8 @@ export const getEntriesById =  (state) =>(id='')=>{
     return { ...entry } // TODO: prueben
 
    // return Entrie
+}
+
+export const getIsloading = (state) =>{
+    return state.isLoading
 }

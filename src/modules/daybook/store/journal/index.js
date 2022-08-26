@@ -1,13 +1,13 @@
 import state from './state';
 import * as actions from './actions';
 import * as getters from './getters';
-import * as mutuations from './mutuations';
+import * as mutations from './mutations';
 
 const journalModule={
     namespaced: true,
     actions,
     getters,
-    mutuations,
+    mutations,
     state
     
 }

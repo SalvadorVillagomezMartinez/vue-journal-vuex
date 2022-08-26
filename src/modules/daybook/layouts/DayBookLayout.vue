@@ -1,6 +1,15 @@
 <template>
     <Navbar/>
-    <div class="d-flex">
+    <div v-if="isLoading"
+        class="row justify-content-md-center">
+        <div class="col-3 alert-info text-center mt-5">
+            Espere por favor...
+            <h3 class="mt-2">
+                <i class="fa fa-spin fa-sync"></i>
+            </h3>
+        </div>
+    </div>
+    <div v-else class="d-flex">
         <div class="col-4">
            <EntreList/>
         </div>
@@ -12,10 +21,31 @@
 </template>
 <script>
 import {defineAsyncComponent} from 'vue'
+import { mapActions , mapGetters ,mapState } from 'vuex';
+
 export default {
     components: {
         Navbar: defineAsyncComponent (()=> import('../components/NavbarBook.vue')),
         EntreList: defineAsyncComponent (()=> import('../components/EntryList.vue')),
+    },
+     computed: {
+        //Solo tomo la informacion , solo disponible en el template
+    ...mapGetters('journal', ['getIsloading']),
+    ...mapState('journal',['isLoading'])
+    
+  
+    },
+    methods:{
+        //Para utilizar la accion
+        ...mapActions ('journal' , ['loadEntries'])
+    },
+    created(){
+        //Importamos mapActions
+        //Llamo la accion
+        ///console.log(isLoading)
+        this.loadEntries()
+  
+
     }
 }
 </script>

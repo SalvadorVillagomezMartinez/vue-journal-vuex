@@ -1,7 +1,7 @@
 <template>
   <div
     class="entry-container mb-3 pointer p-2"
-    @click="$router.push({ name: 'entry', params: { id: entry.id }})"
+    @click="SendEntry"
   >
       <!-- Titilo -->
       <div class="entry-title d-flex">
@@ -24,6 +24,12 @@ export default {
         entry: {
             type: Object,
             required: true
+        }
+    },
+    methods:{
+        SendEntry(){
+            console.log(this.entry.id)
+            this.$router.push({ name: 'entry', params: { id: this.entry.id }})
         }
     },
     computed: {
