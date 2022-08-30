@@ -38,11 +38,12 @@
       @on:click="saveEntry"
 
     />
-    <!-- <img
-      src="https://www.robertlandscapes.com/wp-content/uploads/2014/11/landscape-322100_1280.jpg"
+    <img
+      v-if="entry.picture && !localImage"
+      :src="entry.picture"
       alt="entry-picture"
       class="img-thumbnail"
-    /> -->
+    />
     <img 
       v-if="localImage"
       :src="localImage"
@@ -57,6 +58,7 @@
 import { defineAsyncComponent } from "vue";
 import { mapGetters , mapActions } from "vuex";
 import Swal from 'sweetalert2'
+import uploadImage from "../helpers/uploadImage"
 import getDayMonthYear from "../helpers/getDayMonthYear";
 export default {
   props: {
@@ -115,13 +117,16 @@ export default {
         allowOutsideClick: false
       })
       Swal.showLoading()
-
+      const picture = await uploadImage (this.file)
+      console.log(picture)
+      this.entry.picture = picture
       if(this.entry.id){
         await this.updateEntries(this.entry)
       }else{
         const id = await this.createEntries(this.entry)
         this.$router.push({ name: 'entry', params: { id: id } })
       }
+      this.file = null
       Swal.fire('Guardado' , 'Entrada registrada con exitó', 'success')
         
     },
