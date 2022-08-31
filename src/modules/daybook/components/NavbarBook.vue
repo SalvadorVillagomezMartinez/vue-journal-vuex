@@ -4,10 +4,13 @@
             <img src="@/assets/logo.png" alt="vue Logo"
             height="24"
             class="d-inline-block align-text-top mx-2">
-            DayBook
+            {{ username }}
         </a>
         <div class="d-flex">
-            <button class="btn btn-outline-info mx-2">
+            <button class="btn btn-outline-info mx-2"
+            @click="onLogout"
+            
+            >
               <!-- }<i class="fa fa-camera-retro fa-lg"></i>  -->
               <i class="fa fa-sign-out"></i> 
             </button>   
@@ -16,3 +19,20 @@
         </div>
     </nav>
 </template>
+<script>
+    import { useRouter } from 'vue-router'
+    import useAuth from '@/modules/auth/composables/useAuth'
+    export default {
+        setup(){
+            const router = useRouter()
+            const { username, logout } = useAuth()
+            return {
+                username,
+                onLogout: () => {
+                    router.push({ name: 'login' })
+                    logout()
+                }
+            }
+        }
+    }
+    </script>
